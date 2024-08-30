@@ -1,12 +1,16 @@
 package com.example.demo.hm1.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 
 @Data // generate getter、setter、toString()、equals()、hashCode() and requiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class University {
 
     private List<String> domains;
