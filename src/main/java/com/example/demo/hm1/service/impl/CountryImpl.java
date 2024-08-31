@@ -32,11 +32,11 @@ public class CountryImpl implements CountryService {
     }
 
     @Override
-    public List<University> getUniversityByCountry(String countries) {
-        List<String> countryArr = List.of(countries.split("&"));
+    public List<University> getUniversityByCountry(List<String> countries) {
+//        List<String> countryArr = List.of(countries.split("&"));
 
         // CompletableFuture send request
-        List<CompletableFuture<List<University>>> futures = countryArr.stream()
+        List<CompletableFuture<List<University>>> futures = countries.stream()
                 .map(url -> apiUrl + "?country=" + url)
                 .map(this::fetchDataAsync)
                 .collect(Collectors.toList());

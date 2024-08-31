@@ -5,10 +5,7 @@ import com.example.demo.hm1.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,8 +24,9 @@ class CountryController {
         return new ResponseEntity<>(countryService.getAllCountryUniversity(), HttpStatus.OK);
     }
 
-    @GetMapping("/{country}")
-    public ResponseEntity<List<University>> getUniversityByCountry(@PathVariable("country") String country) {
+    @GetMapping(params = "country")
+    // a request example: .../university?country=Poland,Chile,Thailand
+    public ResponseEntity<List<University>> getUniversityByCountry(@RequestParam("country") List<String> country) {
         return new ResponseEntity<>(countryService.getUniversityByCountry(country), HttpStatus.OK);
     }
 }
