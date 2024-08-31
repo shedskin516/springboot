@@ -27,8 +27,8 @@ public class CountryImpl implements CountryService {
     }
 
     @Override
-    public List<University> getAllCountryUniversity() {
-        return restTemplate.getForObject(apiUrl, List.class);
+    public University[] getAllCountryUniversity() {
+        return restTemplate.getForObject(apiUrl, University[].class);
     }
 
     @Override

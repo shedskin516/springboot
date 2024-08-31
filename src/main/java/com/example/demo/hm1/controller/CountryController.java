@@ -23,7 +23,7 @@ class CountryController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<University>> getAllCountryUniversity() {
+    public ResponseEntity<University[]> getAllCountryUniversity() {
         return new ResponseEntity<>(countryService.getAllCountryUniversity(), HttpStatus.OK);
     }
 
