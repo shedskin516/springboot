@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieItem {
-    private String Title;
+    @JsonProperty("Title")
+    private String title;
     @JsonProperty("Year")
     private int year;
     private String imdbID;
