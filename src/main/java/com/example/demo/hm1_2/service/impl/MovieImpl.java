@@ -34,7 +34,6 @@ public class MovieImpl implements MovieService {
             final int page = i;
             tasks.add(() -> {
                 String url = movieUrl+"?page="+page;
-                System.out.println(url);
                 Movie response = restTemplate.getForObject(url, Movie.class, page);
                 if (response != null && response.getData() != null) {
                     return (int) Stream.of(response.getData())
