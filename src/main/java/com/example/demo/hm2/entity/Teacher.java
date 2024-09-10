@@ -18,19 +18,18 @@ public class Teacher {
     @Column(name = "subject")
     private String subject;
 
-    @ManyToMany(mappedBy = "teachers")
-
-    private Set<Student> students = new HashSet<>();
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<StudentTeacher> studentTeachers = new HashSet<>();
 
     public Teacher() {
     }
 
-    public Teacher(Long id, String firstName, String lastName, String subject, Set<Student> students) {
+    public Teacher(Long id, String firstName, String lastName, String subject, Set<StudentTeacher> studentTeachers) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.subject = subject;
-        this.students = students;
+        this.studentTeachers = studentTeachers;
     }
 
     // Getters and Setters
@@ -66,11 +65,11 @@ public class Teacher {
         this.subject = subject;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public Set<StudentTeacher> getStudentTeachers() {
+        return studentTeachers;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public void setStudentTeachers(Set<StudentTeacher> studentTeachers) {
+        this.studentTeachers = studentTeachers;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.demo.hm2.entity;
 
+import com.example.demo.hm2.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,29 +20,24 @@ public class Student {
     private String lastName;
     @Column(name = "age")
     private int age;
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private String gender;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "student_teacher",
-            joinColumns = @JoinColumn(name = "s_id"),
-            inverseJoinColumns = @JoinColumn(name = "t_id")
-    )
+    private Gender gender;
 
     @JsonIgnore
-    private Set<Teacher> teachers = new HashSet<>();
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<StudentTeacher> studentTeachers = new HashSet<>();
 
     public Student() {
     }
 
-    public Student(Long id, String firstName, String lastName, int age, String gender, Set<Teacher> teachers) {
+    public Student(Long id, String firstName, String lastName, int age, Gender gender, Set<StudentTeacher> studentTeachers) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
-        this.teachers = teachers;
+        this.studentTeachers = studentTeachers;
     }
 
     // Getters and Setters
@@ -76,19 +73,19 @@ public class Student {
         this.age = age;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-    public Set<Teacher> getTeachers() {
-        return teachers;
+    public Set<StudentTeacher> getStudentTeachers() {
+        return studentTeachers;
     }
 
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
+    public void setStudentTeachers(Set<StudentTeacher> studentTeachers) {
+        this.studentTeachers = studentTeachers;
     }
 }
